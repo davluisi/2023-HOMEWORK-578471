@@ -32,4 +32,17 @@ public class Giocatore {
 		return this.cfu;
 	}
 	
+	public String toString() {
+		StringBuilder risultato = new StringBuilder();
+		risultato.append("CFU giocatore: ");
+		risultato.append(this.getCfu());
+		risultato.append("\n");
+		risultato.append(this.getBorsa());
+		return risultato.toString();
+	}
+
+	public String getDescrizione() {
+		return this.toString();
+	}
+	
 }
