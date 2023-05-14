@@ -15,7 +15,6 @@ public class StanzaBuia extends Stanza {
 			return super.getDescrizione();
 		else
 			return "Qui c'è un buio pesto";
-
 	}
 
 }

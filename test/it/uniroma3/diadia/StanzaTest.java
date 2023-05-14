@@ -19,7 +19,6 @@ class StanzaTest {
 	@BeforeEach
 	public void setUp() {
 		this.vuota = new Stanza("vuota");
-		System.out.println("sto eseguendo il setup");
 		this.nonVuota = new Stanza("non-vuota");
 		this.osso = new Attrezzo("osso", 1);
 		this.nonVuota.addAttrezzo(osso);
@@ -45,6 +44,11 @@ class StanzaTest {
 	void testAddAttrezzo2() {
 		this.vuota.addAttrezzo(new Attrezzo("osso" , 1));
 		assertTrue(this.vuota.hasAttrezzo("osso"));
+	}
+	
+	@Test
+	void testAddAttrezzo3() {
+		assertFalse(this.nonVuota.addAttrezzo(new Attrezzo("osso", 4)));
 	}
 	
 	@Test 
