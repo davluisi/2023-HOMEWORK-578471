@@ -1,38 +1,56 @@
 package it.uniroma3.diadia;
 
-public class IOSimulator implements IO{
-	
-	private int indiceProxComando;
-	private String[] comandiLetti;
-	private String[] messaggiStampati;
-	private int indiceMessaggiStampati;
-	
-	public IOSimulator(String[] comandiLetti) {
-		this.comandiLetti = comandiLetti;
-		this.indiceProxComando = 0;
-		this.indiceMessaggiStampati = 0;
-		this.messaggiStampati = new String[50];
+import java.util.ArrayList;
+import java.util.List;
+
+public class IOSimulator implements IO {
+
+	private List<String> righeLette;
+	private int indiceRigheLette;
+
+	public List<String> getMessaggiProdotti() {
+		return messaggiProdotti;
 	}
 
-	@Override
-	public void mostraMessaggio(String messaggio) {
-		this.messaggiStampati[this.indiceMessaggiStampati++] = messaggio;
+	public void setMessaggiProdotti(List<String> messaggiProdotti) {
+		this.messaggiProdotti = messaggiProdotti;
+	}
+
+	//forse si potrebbe inserire una mappa al posto della lista per ricordare ogni riga letta quale messaggi abbia prodotto
+	private List<String> messaggiProdotti;
+	private int indiceMessaggiProdotti;
+	private int indiceMessaggiMostrati;
+
+	public IOSimulator(List<String> righeDaLeggere) {
+		this.righeLette = righeDaLeggere;
+		this.indiceRigheLette = 0;
+		this.indiceMessaggiMostrati = 0;
+		this.messaggiProdotti = new ArrayList<String>();
 	}
 
 	@Override
 	public String leggiRiga() {
-		if (this.comandiLetti.length==0)
-			return null;
-		else
-			return this.comandiLetti[this.indiceProxComando++];
+		String riga = null;
+
+		riga = this.righeLette.get(indiceRigheLette);
+		this.indiceRigheLette++;
+		return riga;
 	}
-	
-	public String[] getMessaggiStampati() {
-		return this.messaggiStampati;
+
+	@Override
+	public void mostraMessaggio(String msg) {
+		this.messaggiProdotti.add(this.indiceMessaggiProdotti, msg);
+		this.indiceMessaggiProdotti++;
 	}
-	
-	public void setMessaggiStampati(String[] messaggiStampati) {
-		this.messaggiStampati = messaggiStampati;
+
+	public String nextMessaggio() {
+		String next = this.messaggiProdotti.get(indiceMessaggiMostrati);
+		this.indiceMessaggiMostrati++;
+		return next;
+	}
+
+	public boolean hasNextMessaggio() {
+		return this.indiceMessaggiMostrati < this.indiceMessaggiProdotti;
 	}
 
 }

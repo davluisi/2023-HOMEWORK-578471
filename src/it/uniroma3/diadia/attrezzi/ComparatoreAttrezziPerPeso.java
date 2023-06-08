@@ -2,12 +2,13 @@ package it.uniroma3.diadia.attrezzi;
 
 import java.util.Comparator;
 
-public class ComparatoreAttrezziPerPeso implements Comparator<Attrezzo>{
-	
-	public int compare(Attrezzo a1, Attrezzo a2) {
-		if(a1.getPeso()!=a2.getPeso())
-			return a1.getPeso()-a2.getPeso();
-		else
-			return a1.getNome().compareTo(a2.getNome());
+public class ComparatoreAttrezziPerPeso implements Comparator<Attrezzo> {
+
+	public int compare(Attrezzo obj1, Attrezzo obj2) {
+		if(obj1.getPeso()-obj2.getPeso() == 0)
+			return obj1.getNome().compareTo(obj2.getNome());
+		return obj1.getPeso()-obj2.getPeso();
 	}
+
+
 }
